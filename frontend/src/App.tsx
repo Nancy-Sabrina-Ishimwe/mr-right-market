@@ -53,7 +53,7 @@ function App() {
           {/* Top row: logo, search, right icons */}
           <div className="flex justify-between items-center">
             <Link to="/" className="text-white text-xl font-bold no-underline">
-              amazona
+              Mr Right Market
             </Link>
 
             <SearchBox />
