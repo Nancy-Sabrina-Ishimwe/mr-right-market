@@ -8,12 +8,12 @@ import { orderRouter } from './routers/orderRouter'
 import { productRouter } from './routers/productRouter'
 import { seedRouter } from './routers/seedRouter'
 import { userRouter } from './routers/userRouter'
-// import { sampleProducts } from './data'
+import { sampleProducts } from './data'
 
 dotenv.config()
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost/tsmernamazonadb'
+  process.env.MONGODB_URI || 'mongodb://localhost/mr-right'
 mongoose.set('strictQuery', true)
 mongoose
   .connect(MONGODB_URI)
