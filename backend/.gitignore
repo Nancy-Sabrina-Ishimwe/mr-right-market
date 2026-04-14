@@ -1,0 +1,7 @@
+/node_modules
+/build
+.env
+
+# System Files for mac and windows
+.DS_Store
+Thumbs.db
