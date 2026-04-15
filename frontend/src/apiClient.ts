@@ -1,8 +1,15 @@
 import axios from 'axios'
 
-// Used vite's environment variable: `import.meta.env.DEV` is true during development
+// Quick type declaration to fix 'process' error
+declare const process: {
+  env: {
+    NODE_ENV: string
+  }
+}
+
 const apiClient = axios.create({
-  baseURL: import.meta.env.DEV ? 'http://localhost:4000/' : '/',
+  baseURL:
+    process.env.NODE_ENV === 'development' ? 'http://localhost:4000/' : '/',
   headers: {
     'Content-type': 'application/json',
   },
@@ -10,15 +17,15 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   async (config) => {
-    const userInfoRaw = localStorage.getItem('userInfo')
-    if (userInfoRaw) {
-      const userInfo = JSON.parse(userInfoRaw)
+    // Safely check for localStorage (avoids errors in Node.js)
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('userInfo')) {
+      const userInfo = JSON.parse(localStorage.getItem('userInfo')!)
       config.headers.authorization = `Bearer ${userInfo.token}`
     }
     return config
   },
   (error) => {
-    return Promise.reject(error)   
+    return Promise.reject(error)
   }
 )
 
